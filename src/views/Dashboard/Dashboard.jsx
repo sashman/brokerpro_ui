@@ -30,6 +30,8 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+import PolicyCountCard from "./PolicyCountCard.jsx"
+
 import { bugs, website, server } from "variables/general.jsx";
 
 import {
@@ -57,22 +59,7 @@ class Dashboard extends React.Component {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
-            <Card>
-              <CardHeader color="warning" stats icon>
-                <CardIcon color="warning">
-                  <Icon>content_copy</Icon>
-                </CardIcon>
-                <p className={classes.cardCategory}>Policies</p>
-                <h3 className={classes.cardTitle}>
-                  100
-                </h3>
-              </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                    50 long term
-                </div>
-              </CardFooter>
-            </Card>
+            <PolicyCountCard/>
           </GridItem>
         </GridContainer>
         <GridContainer>
