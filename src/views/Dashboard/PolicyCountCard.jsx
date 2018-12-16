@@ -38,7 +38,6 @@ class PolicyCountCard extends React.Component {
                 if (error) return <p>Error :(</p>;
 
                 const {policyCount: {total, long_term}} = data;
-
                 return (
                   <div>
                     <CardHeader color="warning" stats icon>
