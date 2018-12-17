@@ -11,6 +11,7 @@ import TableBody from '@material-ui/core/TableBody';
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import TablePagination from '@material-ui/core/TablePagination';
 
 import { currencyFormat } from "../../util/currency"
 import moment from "moment";
@@ -45,61 +46,93 @@ const styles = {
   }
 };
 
-function PolicyList(props) {
-  const { classes } = props;
+class PolicyList extends React.Component {
+  state = {
+    page: 0,
+    rowsPerPage: 5,
+  };
 
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
 
-  return (
-    <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
-        <Card>
-          <CardHeader color="info">
-            <h4 className={classes.cardTitleWhite}>Your policies</h4>
-          </CardHeader>
-          <CardBody>
-            <Query
-              query={gql`
-                {
-                  policies {
-                    customer {
-                      customer_name
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
+  };
+
+  render(){
+    const { classes } = this.props;
+    const { page, rowsPerPage } = this.state;
+
+    return (
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card>
+            <CardHeader color="info">
+              <h4 className={classes.cardTitleWhite}>Your policies</h4>
+            </CardHeader>
+            <CardBody>
+              <Query
+                query={gql`
+                  {
+                    policies {
+                      customer {
+                        customer_name
+                      }
+                      policy_number
+                      premium_pennies
+                      renewal_date
+                      start_date
                     }
-                    policy_number
-                    premium_pennies
-                    renewal_date
-                    start_date
                   }
-                }
-              `}
-            >
-              {({ loading, error, data }) => {
-                if (loading) return <p>Loading...</p>;
-                if (error) return <p>Error :(</p>;
+                `}
+              >
+                {({ loading, error, data }) => {
+                  if (loading) return <p>Loading...</p>;
+                  if (error) return <p>Error :(</p>;
 
-                const policies = data.policies.map(
-                  ({customer: {customer_name}, policy_number, start_date, renewal_date, premium_pennies}) =>
-                    [
-                      customer_name,
-                      policy_number,
-                      moment(start_date).format("L"),
-                      moment(renewal_date).format("L"),
-                      currencyFormat.format(premium_pennies)
-                    ]
-                )
+                  const policies = data.policies.map(
+                    ({customer: {customer_name}, policy_number, start_date, renewal_date, premium_pennies}) =>
+                      [
+                        customer_name,
+                        policy_number,
+                        moment(start_date).format("L"),
+                        moment(renewal_date).format("L"),
+                        currencyFormat.format(premium_pennies)
+                      ]
+                  )
+                  const paginatedPolicies = policies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 
-                return (
-                  <Table
-                    tableHeaderColor="info"
-                    tableHead={["Customer", "Number", "Start", "Renewal", "Premium"]}
-                    tableData={policies}
-                  />);
-                }}
-            </Query>
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
-  );
+                  return (
+                    <div>
+                      <Table
+                        tableHeaderColor="info"
+                        tableHead={["Customer", "Number", "Start", "Renewal", "Premium"]}
+                        tableData={paginatedPolicies}
+                      />
+                      <TablePagination
+                        component="div"
+                        count={policies.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        backIconButtonProps={{
+                          'aria-label': 'Previous Page',
+                        }}
+                        nextIconButtonProps={{
+                          'aria-label': 'Next Page',
+                        }}
+                        onChangePage={this.handleChangePage}
+                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                      />
+                    </div>);
+                  }}
+              </Query>
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
+    );
+  }
 }
 
 export default withStyles(styles)(PolicyList);
