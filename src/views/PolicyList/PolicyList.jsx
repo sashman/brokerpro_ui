@@ -87,7 +87,6 @@ function PolicyList(props) {
                     ]
                 )
 
-                console.log(policies);
                 return (
                   <Table
                     tableHeaderColor="info"
