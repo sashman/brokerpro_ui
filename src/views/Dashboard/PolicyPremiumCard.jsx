@@ -15,12 +15,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
-const currencyFormat = new Intl.NumberFormat('en-GB', {
-  style: 'currency',
-  currency: 'GBP',
-  minimumFractionDigits: 0
-})
-
+import { currencyFormat } from "../../util/currency"
 
 class PolicyCountCard extends React.Component {
   state = {
