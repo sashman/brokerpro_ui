@@ -31,6 +31,7 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import PolicyCountCard from "./PolicyCountCard.jsx"
+import PolicyPremiumCard from "./PolicyPremiumCard.jsx"
 import PolicyRenewalsChart from "./PolicyRenewalsChart.jsx"
 
 import { bugs, website, server } from "variables/general.jsx";
@@ -61,6 +62,9 @@ class Dashboard extends React.Component {
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
             <PolicyCountCard/>
+          </GridItem>
+          <GridItem xs={12} sm={6} md={3}>
+            <PolicyPremiumCard/>
           </GridItem>
         </GridContainer>
         <GridContainer>
