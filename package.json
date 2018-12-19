@@ -37,7 +37,6 @@
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
     "build-package": "babel src --out-dir dist"
   },
-  "homepage" : "http://brokerpro.github.io/build",
   "keywords": [],
   "author": "",
   "license": "MIT",
