@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: npm run build
+          command: npm i && npm run build
       - run:
           name: Deploy Master to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
