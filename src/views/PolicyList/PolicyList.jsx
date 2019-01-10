@@ -78,6 +78,9 @@ class PolicyList extends React.Component {
                       customer {
                         customer_name
                       }
+                      product {
+                        name
+                      }
                       policy_number
                       premium_pennies
                       renewal_date
@@ -91,9 +94,17 @@ class PolicyList extends React.Component {
                   if (error) return <p>Error :(</p>;
 
                   const policies = data.policies.map(
-                    ({customer: {customer_name}, policy_number, start_date, renewal_date, premium_pennies}) =>
+                    ({
+                      customer: { customer_name },
+                      product: { name },
+                      policy_number,
+                      start_date,
+                      renewal_date,
+                      premium_pennies
+                        }) =>
                       [
                         customer_name,
+                        name,
                         policy_number,
                         moment(start_date).format("L"),
                         moment(renewal_date).format("L"),
@@ -106,7 +117,7 @@ class PolicyList extends React.Component {
                     <div>
                       <Table
                         tableHeaderColor="info"
-                        tableHead={["Customer", "Number", "Start", "Renewal", "Premium"]}
+                        tableHead={["Customer", "Product", "Number", "Start", "Renewal", "Premium"]}
                         tableData={paginatedPolicies}
                       />
                       <TablePagination
