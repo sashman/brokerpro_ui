@@ -6,9 +6,10 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 
-import PolicyCountCard from "./PolicyCountCard.jsx"
-import PolicyPremiumCard from "./PolicyPremiumCard.jsx"
-import PolicyRenewalsChart from "./PolicyRenewalsChart.jsx"
+import PolicyCountCard from "./PolicyCountCard.jsx";
+import PolicyPremiumCard from "./PolicyPremiumCard.jsx";
+import PolicyRenewalsChart from "./PolicyRenewalsChart.jsx";
+import ProductSpreadChart from "./ProductSpreadChart.jsx";
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
@@ -29,15 +30,18 @@ class Dashboard extends React.Component {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
-            <PolicyCountCard/>
+            <PolicyCountCard />
           </GridItem>
           <GridItem xs={12} sm={6} md={3}>
-            <PolicyPremiumCard/>
+            <PolicyPremiumCard />
           </GridItem>
         </GridContainer>
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
-            <PolicyRenewalsChart/>
+            <PolicyRenewalsChart />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={4}>
+            <ProductSpreadChart />
           </GridItem>
         </GridContainer>
       </div>
