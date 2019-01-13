@@ -52,19 +52,7 @@ class ProductSpreadChart extends React.Component {
             };
 
             const options = {};
-            const responsiveOptions = [
-              [
-                "screen and (max-width: 640px)",
-                {
-                  seriesBarDistance: 5,
-                  axisX: {
-                    labelInterpolationFnc: function(value) {
-                      return value[0];
-                    }
-                  }
-                }
-              ]
-            ];
+            const responsiveOptions = [[]];
             return (
               <div>
                 <CardHeader color="danger">
